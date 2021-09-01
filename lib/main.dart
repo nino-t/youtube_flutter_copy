@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:youtube_flutter_copy/models/video.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,39 +8,28 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Youtube',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
+        fontFamily: 'Roboto',
+        appBarTheme: const AppBarTheme(
+            titleTextStyle: TextStyle(
+                fontFamily: 'Roboto',
+                fontSize: 24,
+                color: Colors.white,
+                fontWeight: FontWeight.bold)),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'YouTube'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
 
   final String title;
 
@@ -48,68 +38,152 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  final List<Video> _videos = [
+    Video(
+        id: 1,
+        title: 'Do I Regret Selling Twitch to Jeff Bezos for \$970 Million?',
+        thumbnail:
+            'https://i.ibb.co/xGwJqRB/Screen-Shot-2021-09-01-at-23-21-22.png'),
+    Video(
+        id: 2,
+        title: 'Lupe Fiasco, Guy Sebastian - Battle Scars (Lyrics)',
+        thumbnail:
+            'https://i.ibb.co/FVgNLTT/Screen-Shot-2021-09-02-at-00-15-42.png'),
+    Video(
+        id: 3,
+        title: 'Two Unicorn Founders on Books That Changed Their Lives',
+        thumbnail:
+            'https://i.ibb.co/1vG6H80/Screen-Shot-2021-09-02-at-00-17-39.png'),
+    Video(
+        id: 4,
+        title: 'Apple X IBM: Musuh Bebuyutan Naik Pelaminan',
+        thumbnail:
+            'https://i.ibb.co/HHTk2tr/Screen-Shot-2021-09-02-at-00-20-38.png'),
+    Video(
+        id: 5,
+        title: 'Business Rebound Airbnb di tengah Pandemi',
+        thumbnail:
+            'https://i.ibb.co/vhkk6Tv/Screen-Shot-2021-09-02-at-00-23-02.png')
+  ];
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        backgroundColor: const Color.fromRGBO(40, 40, 40, 1),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/logo.png',
+              fit: BoxFit.cover,
+              height: 25,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              child: Text(widget.title),
+              margin: const EdgeInsets.only(left: 7),
             ),
           ],
         ),
+        actions: [
+          IconButton(
+              padding: const EdgeInsets.all(10.0),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.cast,
+                size: 30,
+              )),
+          IconButton(
+              padding: const EdgeInsets.all(10.0),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.notifications,
+                size: 25,
+              )),
+          IconButton(
+              padding: const EdgeInsets.all(10.0),
+              onPressed: () {},
+              icon: const Icon(
+                Icons.search,
+                size: 25,
+              )),
+          const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/profile-image.jpeg'),
+            ),
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      body: Container(
+          height: double.infinity,
+          width: double.infinity,
+          decoration: const BoxDecoration(color: Color.fromRGBO(40, 40, 40, 1)),
+          child: ListView.builder(
+            itemBuilder: (ctx, index) {
+              return Card(
+                elevation: 0,
+                margin: EdgeInsets.zero,
+                color: Colors.transparent,
+                child: Column(
+                  children: [
+                    Image.network(_videos[index].thumbnail),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 10),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            backgroundImage:
+                                AssetImage('assets/images/profile-image.jpeg'),
+                          ),
+                          Expanded(
+                              child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Column(
+                              children: [
+                                Text(_videos[index].title,
+                                    style: const TextStyle(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        height: 1.3)),
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: const [
+                                    Text(
+                                      'Justin Kan',
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(170, 170, 170, 1),
+                                          fontSize: 14),
+                                    ),
+                                    Text('21 rb x ditonton',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                170, 170, 170, 1),
+                                            fontSize: 14)),
+                                    Text('2 minggu yang lalu',
+                                        style: TextStyle(
+                                            color: Color.fromRGBO(
+                                                170, 170, 170, 1),
+                                            fontSize: 14))
+                                  ],
+                                )
+                              ],
+                            ),
+                          ))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              );
+            },
+            itemCount: _videos.length,
+          )),
     );
   }
 }
